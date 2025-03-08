@@ -59,55 +59,57 @@ const WhyChooseSection = () => {
   ]
 
   return (
-    <section className="why-choose-section  container mx-auto px-14 py-12" aria-labelledby="why-choose-heading">
-      <div className="grid grid-cols-2 lg:grid-cols-2 gap-8">
-        <div className='flex flex-col gap-6 '>
+    <section 
+      className="why-choose-section container mx-auto px-4 sm:px-6 lg:px-14 py-8 sm:py-10 lg:py-12" 
+      aria-labelledby="why-choose-heading"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
+        <div className='flex flex-col gap-4 sm:gap-6'>
           {/* Left side content */}
-        <div>
-          <h3 className="text-amber-500 font-medium mb-2">WHY REGISTERKARO.IN</h3>
-          <h1 id="why-choose-heading" className="text-4xl font-bold text-gray-800 mb-6">Why Choose Register Karo</h1>
-          
-          <p className="text-gray-700 mb-6 leading-relaxed max-w-xl">
-            It is with consistent services and results that build trust with the people and that in 
-            turn help us to serve the business better.
-          </p>
-        </div>
+          <div>
+            <h3 className="text-amber-500 font-medium mb-2">WHY REGISTERKARO.IN</h3>
+            <h1 id="why-choose-heading" className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">Why Choose Register Karo</h1>
+            
+            <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed max-w-xl">
+              It is with consistent services and results that build trust with the people and that in 
+              turn help us to serve the business better.
+            </p>
+          </div>
 
-        {/* left 1 card */}
-        <div className='flex justify-end pt-10 h-[260px] '>
-        {card.map((card) => (
-            <div 
-              key={card.id}
-              className={`${card.bgColor} rounded-xl w-[50%] p-6 flex flex-col items-center text-center transition-transform hover:scale-105`}
-            >
-              <div className={`${card.iconColor} mb-4`}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  {card.icon}
-                </svg>
+          {/* left 1 card */}
+          <div className='flex justify-center md:justify-end pt-4 sm:pt-6 md:pt-10 h-auto sm:h-[220px] md:h-[260px]'>
+            {card.map((card) => (
+              <div 
+                key={card.id}
+                className={`${card.bgColor} rounded-xl w-full sm:w-[70%] md:w-[60%] lg:w-[50%] p-4 sm:p-6 flex flex-col items-center text-center transition-transform hover:scale-105 will-change-transform`}
+              >
+                <div className={`${card.iconColor} mb-3 sm:mb-4`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 sm:h-12 sm:w-12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    {card.icon}
+                  </svg>
+                </div>
+                <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{card.title}</h2>
+                <p className="text-gray-600 text-sm sm:text-base">{card.description}</p>
               </div>
-              <h2 className="text-xl font-bold mb-3">{card.title}</h2>
-              <p className="text-gray-600">{card.description}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </div>
        
-
         {/* Right side grid of cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {/* Render all feature cards from the array */}
           {featureCards.map((card) => (
             <div 
               key={card.id}
-              className={`${card.bgColor} rounded-xl p-6 flex flex-col items-center text-center transition-transform hover:scale-105`}
+              className={`${card.bgColor} rounded-xl p-4 sm:p-6 flex flex-col items-center text-center transition-transform hover:scale-105 will-change-transform`}
             >
-              <div className={`${card.iconColor} mb-4`}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <div className={`${card.iconColor} mb-3 sm:mb-4`}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 sm:h-12 sm:w-12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   {card.icon}
                 </svg>
               </div>
-              <h2 className="text-xl font-bold mb-3">{card.title}</h2>
-              <p className="text-gray-600">{card.description}</p>
+              <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{card.title}</h2>
+              <p className="text-gray-600 text-sm sm:text-base">{card.description}</p>
             </div>
           ))}
         </div>
@@ -119,4 +121,5 @@ const WhyChooseSection = () => {
 // Add display name for better debugging in React DevTools
 WhyChooseSection.displayName = 'WhyChooseSection';
 
-export default WhyChooseSection;
+// Use React.memo for performance optimization
+export default React.memo(WhyChooseSection);
