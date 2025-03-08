@@ -1,4 +1,5 @@
 import HomePage from "./components/HomePage"
+import RegisterKaroUI from "./components/RegisterKaroUI"
 import AboutPage from "./page/AboutPage"
 import AppDownloadSection from "./page/AppDownloadSection"
 import ApplicationProcessSteps from "./page/ApplicationProcessSteps"
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <>
+      <RegisterKaroUI />
       <HomePage />
       <TrustedBySection />
       <ServicesPage />
