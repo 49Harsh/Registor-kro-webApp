@@ -1,40 +1,63 @@
-import React from 'react';
+import React, { memo } from 'react';
+
+const LogoImage = memo(({ name, src }) => (
+  <div className="flex items-center justify-center p-4 transition-transform hover:scale-105">
+    <img
+      src={src}
+      alt={`${name} logo`}
+      loading="lazy"
+      width="120"
+      height="40"
+      className="h-8 w-auto object-contain"
+      onError={(e) => {
+        e.currentTarget.onerror = null;
+        e.currentTarget.src = "/imgss/placeholder-logo.png";
+        console.log(`Failed to load ${name} logo`);
+      }}
+    />
+  </div>
+));
 
 const CompanyLogos = () => {
-  // Array of company names for the placeholders
-  const companies = ["coinbase", "spotify", "slack", "dropbox", "webflow", "zoom"];
+  // Restructured for easier maintenance and better performance
+  const companies = [
+    { name: "coinbase", src: "/imgss/coinbase.png" },
+    { name: "spotify", src: "/imgss/spotify.png" },
+    { name: "slack", src: "/imgss/slack.png" },
+    { name: "dropbox", src: "/imgss/dropbox.png" },
+    { name: "webflow", src: "/imgss/webflow.png" },
+    { name: "zoom", src: "/imgss/zoom.png" }
+  ];
 
   return (
-    <div className="w-full py-12 bg-white">
+    <section 
+      className="w-full py-12 bg-white" 
+      aria-labelledby="partners-heading"
+    >
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
+        <h2 
+          id="partners-heading" 
+          className="text-center text-xl font-semibold text-gray-800 mb-8 md:mb-10"
+        >
+          Trusted by Industry Leaders
+        </h2>
+        
+        <div 
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6" 
+          role="list" 
+          aria-label="Company logos"
+        >
           {companies.map((company) => (
-            <div key={company} className="w-32 md:w-36 lg:w-40">
-              {/* This empty div is where you can add your images */}
-              {/* You can replace this with an <img> tag */}
-              <div className="w-full h-12 flex items-center justify-center">
-                {/* Image will go here */}
-                <h2>{company}</h2>
-              </div>
-            </div>
-
-
-            
+            <LogoImage 
+              key={company.name} 
+              name={company.name} 
+              src={company.src} 
+            />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default CompanyLogos;
-
-
-
-{/* <div key={company} className="w-32 md:w-36 lg:w-40">
-  <img 
-    src={`/path/to/${company}-logo.png`} 
-    alt={`${company} logo`}
-    className="w-full"
-  />
-</div> */}
+export default memo(CompanyLogos);

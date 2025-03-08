@@ -1,4 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
+
+const StatCard = memo(({ number, label, color }) => (
+  <div className="flex flex-col items-center p-4 sm:p-6 rounded-lg shadow-sm transition-transform hover:scale-105">
+    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ color }}>
+      {number}+
+    </h3>
+    <p className="text-sm sm:text-base text-gray-700 font-medium mt-2 text-center">
+      {label}
+    </p>
+  </div>
+));
 
 const StatsSection = () => {
   const stats = [
@@ -11,27 +22,35 @@ const StatsSection = () => {
   ];
 
   return (
-    <div className="w-full py-16 px-6 bg-white">
-      <div className="max-w-6xl mx-auto text-center">
-        <h3 className="text-orange-500 font-medium mb-3">WHY REGISTER KARO</h3>
-        <h2 className="text-4xl font-bold text-stone-800 mb-16">Some Numbers are important</h2>
+    <section 
+      className="py-12 px-4 bg-gray-50" 
+      aria-labelledby="stats-heading"
+    >
+      <div className="container mx-auto">
+        <h2 
+          id="stats-heading"
+          className="text-2xl sm:text-3xl font-bold text-center mb-3"
+        >
+          WHY REGISTER KARO
+        </h2>
+        <p className="text-center text-gray-600 mb-8">
+          Some Numbers are important
+        </p>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <span 
-                className="text-4xl md:text-5xl font-bold mb-2"
-                style={{ color: stat.color }}
-              >
-                {stat.number}<sup>+</sup>
-              </span>
-              <span className="text-sm font-semibold text-stone-800">{stat.label}</span>
-            </div>
+            <StatCard 
+              key={`stat-${index}`}
+              number={stat.number} 
+              label={stat.label} 
+              color={stat.color}
+            />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default StatsSection;
+// Memoize the component to prevent unnecessary re-renders
+export default memo(StatsSection);
